@@ -12,4 +12,5 @@ const TextArea = (props)=>{
   )
 }
 
+// Export component
 export default TextArea;
