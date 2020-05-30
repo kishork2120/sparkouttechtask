@@ -3,6 +3,8 @@ Notes taking app with login and register page
 
 commentation in this project supports jsdocs
 
+note: except the textarea i have impleted the enter on next field.
+
 # Running
 The below code applys for both backend and frontend
 
