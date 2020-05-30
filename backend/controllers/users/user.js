@@ -18,7 +18,6 @@ exports.login = (req, res, next) => {
       if (err) throw err;
       if (user) {
         req.logIn(user, (err) => {
-          console.log(req.session);
           if (err) {
             return next(err);
           }

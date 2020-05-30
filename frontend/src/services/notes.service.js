@@ -6,7 +6,7 @@ export async function getNotesListService(){
 }
 
 // Create Notes
-export async function addNotes(body){
+export async function addNotesService(body){
   return await fetch(`/notes/addNotes`,{
       method:"POST",
       headers: {'Content-Type':'application/json'},
@@ -15,7 +15,7 @@ export async function addNotes(body){
 }
 
 // Update Notes details
-export async function editNotes(body){
+export async function editNotesService(body){
   return await fetch(`/notes/editNotes`,{
       method:"PUT",
       headers: {'Content-Type':'application/json'},
@@ -24,7 +24,7 @@ export async function editNotes(body){
 }
 
 // Delete Notes
-export async function deleteNotes(body){
+export async function deleteNotesService(body){
   return await fetch(`/notes/deleteNotes`,{
       method:"DELETE",
       headers: {'Content-Type':'application/json'},

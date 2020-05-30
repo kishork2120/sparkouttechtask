@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './modalWrapper.component';
 import NoteForm from './noteForm.component';
-import { addNotes, editNotes } from '../services/notes.service';
+import { addNotesService, editNotesService } from '../services/notes.service';
 import { responseHandler } from '../common/helper';
 
 /**
@@ -18,11 +18,11 @@ const AddEditNotes = ({ props }) => {
   const popupTypeMapper = {
     add: {
       title: 'Add Note',
-      function: addNotes
+      function: addNotesService
     },
     edit: {
       title: 'Edit Note',
-      function: editNotes
+      function: editNotesService
     }
   }
 
@@ -34,7 +34,6 @@ const AddEditNotes = ({ props }) => {
       setLoading(true);
       let response = await popupTypeMapper[props.type].function(data);
       setLoading(false);
-      console.log(response)
       if (response.status === 200) {
         props.getNotesList();
         props.closePopup();
