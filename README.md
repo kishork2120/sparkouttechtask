@@ -13,6 +13,7 @@ yarn start / npm start
 # .env file content ( backend )
 NODE_PORT=(port)
 DB_STRING=(db string with username and password)
+SESSION_KEY=(random key)
 
 # frontend setup
 enter the node url with port in proxy key in package.json for proxy setup
