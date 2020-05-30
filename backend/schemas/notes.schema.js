@@ -12,7 +12,7 @@ const NotesSchema = new Schema({
   content: {
     type: String,
     min: [1, 'Content cannot be empty'],
-    max: [30, 'Maximum 30 characters allowed'],
+    max: [50, 'Maximum 30 characters allowed'],
     required: [true, 'Note content cannot be empty'],
   },
   createdBy: { type: mongoose.ObjectId, required: [true, 'Created ID required'] },

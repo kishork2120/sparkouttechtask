@@ -55,3 +55,14 @@ exports.register = async (req, res) => {
   }
 };
 
+/**
+ * @function logout
+ * @description - logout the user
+ * @param {Object} req - request object from express
+ * @param {Object} res - response object from express
+ */
+exports.logout = (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.json({ status: 200, message: 'You have been logged out.' });
+};

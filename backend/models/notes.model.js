@@ -1,5 +1,6 @@
 // Modules requried for this page is imported here
 const NotesModel = require('../schemas/notes.schema');
+const mongoose = require('mongoose');
 
 /**
  * @function addNotes
@@ -19,7 +20,7 @@ exports.addNotes = async (body) => {
  * @return {Promise} - resolves to list of notes
  */
 exports.getNotesList = async (data) => {
-  const query = { deleted: false };
+  const query = { deleted: false, _id: mongoose.Types.ObjectId(data.id) };
   return NotesModel.find(query);
 };
 

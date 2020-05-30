@@ -10,6 +10,7 @@ const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
+const applicationConfig = require('./config/application.config');
 
 // Initialising middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +32,16 @@ app.use(passport.session());
 
 // OAuth initialization
 require('./services/auth.service');
+
+// Check if users logged in
+app.use((req, res, next) => {
+  if (req.isAuthenticated() || applicationConfig.WHITE_LISTED_URL.indexOf(req.originalUrl.split('?')[0]) != -1) {
+    next();
+  } else {
+    res.json({ status: 401, message: 'User not logged in | Authentication error' });
+  }
+});
+
 
 // Router config
 router(app);

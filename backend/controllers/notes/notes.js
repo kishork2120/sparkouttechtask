@@ -33,6 +33,7 @@ exports.addNotes = async (req, res) => {
 exports.getNotesList = async (req, res) => {
   try {
     const query = req.query;
+    console.log(req.session.passport.user);
     const notesList = await notesModle.getNotesList(query);
     res.json({
       status: 200,
