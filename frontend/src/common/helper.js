@@ -1,5 +1,6 @@
 // Error/Exception response handler
 export function responseHandler(response, history) {
+  console.log(response);
   if (response.status === 401) {
     sessionStorage.setItem('user', null);
     history.push('/');

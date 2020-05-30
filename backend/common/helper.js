@@ -11,7 +11,7 @@ exports.exceptionHandler = (exception, res, statusCode = 500) => {
   if (res) {
     res.json({
       status: statusCode,
-      errorMessage: exception,
+      message: exception,
     });
   };
 };
@@ -27,6 +27,6 @@ exports.validationErrorHandler = (errors, res) => {
   const errorMessage = Object.values(errors).map((e) => e.message).join(', ');
   res.json({
     status: 400,
-    errorMessage,
+    message: errorMessage,
   });
 };
