@@ -20,7 +20,7 @@ exports.addNotes = async (body) => {
  * @return {Promise} - resolves to list of notes
  */
 exports.getNotesList = async (data) => {
-  const query = { deleted: false, _id: mongoose.Types.ObjectId(data.id) };
+  const query = { deleted: false, createdBy: mongoose.Types.ObjectId(data.id) };
   return NotesModel.find(query);
 };
 

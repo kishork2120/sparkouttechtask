@@ -12,6 +12,7 @@ const helper = require('../../common/helper');
 exports.addNotes = async (req, res) => {
   try {
     const body = req.body;
+    body.createdBy = req.session.passport.user;
     const notesDetails = await notesModle.addNotes(body);
     res.json({
       status: 200,
@@ -33,7 +34,7 @@ exports.addNotes = async (req, res) => {
 exports.getNotesList = async (req, res) => {
   try {
     const query = req.query;
-    console.log(req.session.passport.user);
+    query.id = req.session.passport.user;
     const notesList = await notesModle.getNotesList(query);
     res.json({
       status: 200,

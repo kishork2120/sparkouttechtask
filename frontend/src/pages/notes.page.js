@@ -5,7 +5,6 @@ import { responseHandler } from '../common/helper';
 import { useHistory } from 'react-router-dom';
 import NotesCard from '../components/noteCard.component';
 import NoData from '../components/nodata.component';
-import Modal from '../components/modalWrapper.component';
 import AddEditNotes from '../components/addEditNotes.component';
 
 /**
@@ -18,6 +17,7 @@ const NotesPage = () => {
   const [notesList, setNotesList] = useState([]);
   const [isOpenModal, setIsOpenModel] = useState(false);
   const [popupType, setPopupType] = useState('');
+  const [noteData, setNoteData] = useState();
 
   // Get note list
   const getNotesList = async () => {
@@ -38,14 +38,15 @@ const NotesPage = () => {
   }
 
   // Close popup
-  const closePopup = ()=>{
+  const closePopup = () => {
     setIsOpenModel(false)
   }
 
   // Open popup
-  const openPopup = (type)=>{
+  const openPopup = (type, data) => {
     setPopupType(type);
     setIsOpenModel(true);
+    data ? setNoteData(data) : setNoteData({ name: "", content: "" });
   }
 
   useEffect(() => {
@@ -56,17 +57,24 @@ const NotesPage = () => {
     <div className="container">
       <NavBar />
       <div className="list_heading box">
-        <button className="button is-primary" onClick={()=>openPopup('add')}>Add Notes</button>
+        <button className="button is-primary" onClick={() => openPopup('add')}>Add Notes</button>
       </div>
       {!isLoading && (notesList.length != 0) &&
-        <div class="columns is-multiline">
-          <div class="column is-one-third">
-            <NotesCard />
-          </div>
+        <div className="columns is-multiline">
+          {notesList.map((d, i) =>
+            <div className="column is-one-third" key={i}>
+              <NotesCard
+                props={{
+                  ...d,
+                  editCallback: () => openPopup('edit', notesList[i])
+                }}
+              />
+            </div>
+          )}
         </div>
       }
       <NoData props={{ condition: !notesList.length && !isLoading }} />
-      <AddEditNotes props={{ closePopup, modalState:isOpenModal, type:popupType}}/>
+      <AddEditNotes props={{ closePopup, modalState: isOpenModal, type: popupType, getNotesList, noteData }} />
     </div>
   )
 }
